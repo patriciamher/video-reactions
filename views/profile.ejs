@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+    <title>Watch Naruto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+
+  <div class="page-header text-center">
+      <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+      <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+  </div>
+
+  <div class="row">
+
+  <!-- LOCAL INFORMATION -->
+    <div class="col-sm-6">
+      <div class="well"> 
+  
+              
+    
+      </div>
+      <div class="col-sm-6">
+        <h3>Comments</h3>
+        <ul class="messages">
+          <% for(var i=0; i<messages.length; i++) {%>
+            <iframe width="520" height="335" src="<%= messages[i].video %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <li class="message">
+              <span><%= messages[i].name %></span>
+              <span><%= messages[i].msg %></span>
+              <% if(messages[i].reaction == '') {%>
+                <span><i id="laughing" class="fa-regular fa-face-grin-tears" aria-hidden="true"></i></span>
+                <span><i id="meh" class="fa-regular fa-face-meh"></i></span>
+                <span><i id="mad" class="fa-regular fa-face-angry" aria-hidden="true"></i></span>
+                <% } else if(messages[i].reaction == "mad"){%> 
+                  <span><i id="mad" class="fa-regular fa-face-angry" aria-hidden="true"></i></span>
+                <% } else if(messages[i].reaction == "meh"){%> 
+                  <span><i id="meh" class="fa-regular fa-face-meh"></i></span>
+                <% } else if(messages[i].reaction == "laughing"){%> 
+                  <span><i id="laughing" class="fa-regular fa-face-grin-tears" aria-hidden="true"></i></span>
+              <% } %>
+            </li>
+          <% } %>
+        </ul>
+
+    <h2>Add a message</h2>
+  <% if (user.local.email) { %>
+    <form action="/messages" method="POST">
+      <input type="text" value="<%= user.local.email %>" name="name">
+      <input type="text" placeholder="Add a comment" name="msg">
+      <input type="text" placeholder="Link video" name="video">
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <% } %>
+
+</div>
+
+<script src="main.js"></script>
+
+</body>
+</html>
