@@ -45,7 +45,10 @@ module.exports = function(app, passport, db) {
 
     app.put('/messages', (req, res) => {
       db.collection('messages')
-      .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
+      .findOneAndUpdate({
+        name: req.body.name, 
+        msg: req.body.msg
+      }, {
         $set: {
           reaction: req.body.reaction,
         }
